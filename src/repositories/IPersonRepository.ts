@@ -10,6 +10,9 @@ interface ICreatePersonDTO {
 interface IPersonRepository {
   findByName(name: string): Person;
   findByDoc(doc: string);
-
+  list(): Person[];
+  create({
+    name, doc, birthDate, id,
+  }: ICreatePersonDTO): void;
 }
 export { IPersonRepository, ICreatePersonDTO };

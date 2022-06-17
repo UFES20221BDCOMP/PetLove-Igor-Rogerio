@@ -8,10 +8,10 @@ interface IRequest {
 }
 
 class CreatePersonService {
-  constructor(private personRepository: PersonRepository) { }
+  constructor(private personRepository: IPersonRepository) { }
 
   execute({ name, doc, birthDate }: IRequest): void {
-    const personAlreadyExists = this.personRepository.findByDoc();
+    const personAlreadyExists = this.personRepository.findByDoc(doc);
     if (personAlreadyExists) {
       throw new Error('Person already exists');
     }

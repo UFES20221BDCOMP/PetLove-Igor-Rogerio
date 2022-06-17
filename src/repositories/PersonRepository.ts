@@ -9,7 +9,7 @@ class PersonRepository implements IPersonRepository {
   }
 
   create({
-    id, name, doc, birthDate,
+    name, doc, birthDate, id,
   }: ICreatePersonDTO): void {
     const person = new Person();
 
@@ -19,6 +19,7 @@ class PersonRepository implements IPersonRepository {
 
     this.persons.push(person);
   }
+
   findByName(name): Person {
     // TODO
     return null;
@@ -26,6 +27,10 @@ class PersonRepository implements IPersonRepository {
 
   findByDoc(): Person {
     return null;
+  }
+
+  list(): Person[] {
+    return this.persons;
   }
 }
 export { PersonRepository };
