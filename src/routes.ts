@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 
-import PersonService from './PersonService';
+import PersonService from './service/PersonService';
 
 export function createPerson(request, response) {
   const { name, doc, birthDate } = request.body;

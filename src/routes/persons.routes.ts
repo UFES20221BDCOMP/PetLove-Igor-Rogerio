@@ -1,22 +1,22 @@
 import { Router } from 'express';
-import { v4 as uuidV4 } from 'uuid';
 
-import PersonService from '../PersonService';
+import { Person } from '../model/Person';
+import { PersonRepository } from '../repositories/PersonRepository';
+import { CreatePersonService } from '../service/CreatePersonService';
 
-const personsRouter = Router();
+const personsRoutes = Router();
 
-const persons = [];
+const persons: Person[] = [];
+const personRepository = new PersonRepository();
 
-personsRouter.post('/persons', (request, response) => {
+personsRoutes.post('/', (request, response) => {
   const { name, doc, birthDate } = request.body;
 
-  persons.push({
-    name, doc, birthDate,
-  });
+  const createPersonService = new CreatePersonService(personRepository);
 
-  PersonService.execute({ name, doc, birthDate });
+  createPersonService.execute({ name, doc, birthDate });
 
   return response.status(201).send();
 });
 
-export { personsRouter };
+export { personsRoutes };
