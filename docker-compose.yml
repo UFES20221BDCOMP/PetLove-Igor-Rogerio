@@ -1,10 +1,27 @@
-version: "3.7"
+version: "3.9"
 
 services:
+  database_petlove: 
+    image: postgres
+    container_name: database_petlove
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=docker
+      - POSTGRES_PASSWORD=petlove
+      - POSTGRES_DB=petlove
+    volumes:
+      - pgdata:/data/postgres
+
   app:
     build: .
     container_name: petlove
     ports:
-      - 4000:4000
+      - 3333:3333
     volumes:
-      - .:/usr/app
+      - .:/user/app
+
+volumes:
+  pgdata:
+    driver: local
