@@ -2,7 +2,7 @@ import { Router } from 'express';
 
 import { Schedule } from '../model/Schedule';
 import { ScheduleRepository } from '../repositories/ScheduleRepository';
-import { CreateScheduleService } from '../service/CreateScheduleService';
+import { ScheduleService } from '../service/ScheduleService';
 
 const scheduleRoutes = Router();
 
@@ -15,7 +15,7 @@ scheduleRoutes.post('/', (request, response) => {
     owner,
     date,
   } = request.body;
-  const createPersonService = new CreateScheduleService(scheduleRepository);
+  const createPersonService = new ScheduleService(scheduleRepository);
   createPersonService.execute({
     service,
     animal,

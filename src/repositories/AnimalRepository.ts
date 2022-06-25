@@ -35,8 +35,8 @@ class AnimalRepository implements IAnimalRepository {
     this.animals.push(animal);
   }
 
-  list(): Animal[] {
-    return this.animals;
+  list(): Promise<Animal[]> {
+    return null;
   }
 }
 export { AnimalRepository };

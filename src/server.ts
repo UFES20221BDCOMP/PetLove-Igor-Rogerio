@@ -1,3 +1,7 @@
+/*  
+ *  Igor Wandermurem Dummer - 2019109389 
+ *  Rogério Medeiros - 
+*/
 import express from 'express';
 import "reflect-metadata";
 import "./database"

@@ -1,29 +1,21 @@
+import { AnimalController } from '../controller/AnimalController';
 import { Router } from 'express';
 
 import { Animal } from '../model/Animal';
 import { AnimalRepository } from '../repositories/AnimalRepository';
-import { CreateAnimalService } from '../service/CreateAnimalService';
+import { AnimalService } from '../service/AnimalService';
 
 const animalsRoutes = Router();
 
 const animalRepository = new AnimalRepository();
+const animalController = new AnimalController();
 
 animalsRoutes.post('/', (request, response) => {
-  const {
-    name, cost, type, owner,
-  } = request.body;
-  const createPersonService = new CreateAnimalService(animalRepository);
-  createPersonService.execute({
-    name, cost, type, owner,
-  });
-
-  return response.status(201).send();
+  return animalController.create(request,response);
 });
 
 animalsRoutes.get('/', (request, response) => {
-  const all = animalRepository.list();
-
-  return response.json(all);
+  return animalController.list();
 });
 
 export { animalsRoutes };

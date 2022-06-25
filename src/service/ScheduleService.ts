@@ -9,7 +9,7 @@ interface IRequest {
   id?: string;
 }
 
-class CreateScheduleService {
+class ScheduleService {
   constructor(private personRepository: IScheduleRepository) { }
   execute({
     service, animal, owner, date,
@@ -23,4 +23,4 @@ class CreateScheduleService {
   }
 }
 
-export { CreateScheduleService };
+export { ScheduleService };

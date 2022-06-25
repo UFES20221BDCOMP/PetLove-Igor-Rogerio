@@ -1,3 +1,4 @@
+import { Animal } from 'model/Animal';
 import { AnimalRepository } from '../repositories/AnimalRepository';
 import { IAnimalRepository, ICreateAnimalDTO } from '../repositories/IAnimalRepository';
 
@@ -8,12 +9,12 @@ interface IRequest {
   type: string;
 }
 
-class CreateAnimalService {
-  constructor(private personRepository: IAnimalRepository) { }
-  execute({
+class AnimalService {
+  constructor(private animalRepository: IAnimalRepository) { }
+  create({
     name, cost, owner, type,
   }: IRequest): void {
-    this.personRepository.create({
+    this.animalRepository.create({
       name,
       cost,
       owner,
@@ -26,6 +27,10 @@ class CreateAnimalService {
       type,
     });
   }
+
+  list():Promise<Animal[]>{
+    return this.animalRepository.list();
+  }
 }
 
-export { CreateAnimalService };
+export { AnimalService };

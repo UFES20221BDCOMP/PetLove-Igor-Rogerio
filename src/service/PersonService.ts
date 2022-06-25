@@ -7,7 +7,7 @@ interface IRequest {
   birthDate: Date;
 }
 
-class CreatePersonService {
+class PersonService {
   constructor(private personRepository: IPersonRepository) { }
 
   execute({ name, doc, birthDate }: IRequest): void {
@@ -20,7 +20,7 @@ class CreatePersonService {
   }
 }
 
-export { CreatePersonService };
+export { PersonService };
 
 /**
  //* nome - string
