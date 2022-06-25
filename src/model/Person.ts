@@ -1,22 +1,19 @@
-/* import { Expose } from 'class-transformer';
-import {
-  Column, CreateDateColumn, Entity, PrimaryColumn,
-} from 'typeorm'; */
 import { v4 as uuidV4 } from 'uuid';
+import { Entity, PrimaryColumn, Column } from "typeorm";
 
-// @Entity('person')
+@Entity('Person')
 class Person {
-  // @PrimaryColumn()
+  @PrimaryColumn("uuid")
   id: string;
 
-  // @Column()
+  @Column()
   name: string;
 
-  // @Column()
+  @Column()
   doc: string;
 
-  // @Column()
-  birthDate: Date;
+  @Column({type: 'date'})
+  birthDate: string;
 
   constructor() {
     if (!this.id) {

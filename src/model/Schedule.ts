@@ -1,24 +1,25 @@
-/* import { Expose } from 'class-transformer';
-import {
-  Column, CreateDateColumn, Entity, PrimaryColumn,
-} from 'typeorm'; */
 import { v4 as uuidV4 } from 'uuid';
+import { Entity, PrimaryColumn, Column, ManyToOne } from "typeorm";
+import { Service } from './Service';
+import { Animal } from './Animal';
+import { Person } from './Person';
+import { type } from 'os';
 
-// @Entity('person')
+@Entity('Schedule')
 class Schedule {
-  // @PrimaryColumn()
+  @PrimaryColumn("uuid")
   id: string;
 
-  // @Column()
-  owner: string;
+  @ManyToOne(type=>Person)
+  owner: Person;
 
-  // @Column()
-  animal: string;
+  @ManyToOne(type=>Animal)
+  animal: Animal;
 
-  // @Column()
-  service: number;
+  @ManyToOne(type=>Service)
+  service: Service;
 
-  // @Column()
+  @Column({type: 'date'})
   date: string;
 
   constructor() {

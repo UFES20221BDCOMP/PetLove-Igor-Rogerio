@@ -3,23 +3,25 @@ import {
   Column, CreateDateColumn, Entity, PrimaryColumn,
 } from 'typeorm'; */
 import { v4 as uuidV4 } from 'uuid';
+import { Entity, PrimaryColumn, Column, ManyToOne, JoinTable } from "typeorm";
+import { Person } from './Person';
 
-// @Entity('person')
+@Entity('Animal')
 class Animal {
-  // @PrimaryColumn()
+  @PrimaryColumn("uuid")
   id: string;
 
-  // @Column()
+  @Column()
   name: string;
 
-  // @Column()
+  @Column()
   cost: number;
 
-  // @Column()
+  @Column()
   type: string;
 
-  // @Column()
-  owner: string;
+  @ManyToOne(type=>Person)
+  owner: Person;
 
   constructor() {
     if (!this.id) {

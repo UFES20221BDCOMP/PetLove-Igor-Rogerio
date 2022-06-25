@@ -1,4 +1,6 @@
 import express from 'express';
+import "reflect-metadata";
+import "./database"
 
 import { animalsRoutes } from './routes/animals.routes';
 import { personsRoutes } from './routes/persons.routes';
@@ -10,4 +12,4 @@ app.use('/persons', personsRoutes);
 
 app.use('/animals', animalsRoutes);
 
-app.listen(4000, () => console.log('🧌 Server is run on port 4000'));
+app.listen(3333, () => console.log('✨ Server is run on port 3333'));
