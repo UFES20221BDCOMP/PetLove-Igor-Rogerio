@@ -17,9 +17,6 @@ const AppDataSource = new DataSource({
 AppDataSource.initialize()
     .then(async () => {
         console.log("Data Source has been initialized!")
-        const users = await AppDataSource.manager.find(Animal);
-        console.log("Loaded users: ", users)
-        
     })
     .catch((err) => {
         console.error("Error during Data Source initialization", err)

@@ -4,7 +4,7 @@ import { AnimalRepository } from '../repositories/AnimalRepository';
 
 import { AnimalService } from "../service/AnimalService";
 
-class CreateAnimalController {
+class AnimalController {
     constructor(private animalService:AnimalService){
     }
     handle(request: Request, response: Response): Response{
@@ -16,13 +16,9 @@ class CreateAnimalController {
     list(): Promise<Animal[]>{
         return this.animalService.list();
     }
-}
-
-class ListAnimalController {
-    constructor(private animalService:AnimalService){
-    }
-    handle(): Promise<Animal[]>{
-        return this.animalService.list();
+    findByName(name: string): Promise<Animal[]>{
+        console.log("body", name);
+        return this.animalService.findByName(name);
     }
 }
-export {CreateAnimalController,ListAnimalController}
+export {AnimalController}

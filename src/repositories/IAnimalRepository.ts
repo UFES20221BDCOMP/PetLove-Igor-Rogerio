@@ -10,8 +10,8 @@ interface ICreateAnimalDTO {
 }
 
 interface IAnimalRepository {
-  findByName(name: string): Animal;
-  findByOwner(person: Person): Animal[];
+  findByName(name: string): Promise<Animal[]>;
+  findByOwner(person: Person): Promise<Animal[]>;
   list(): Promise<Animal[]>;
   create({
     name,

@@ -32,6 +32,10 @@ class AnimalService {
   list():Promise<Animal[]>{
     return this.animalRepository.list();
   }
+
+  findByName(name){
+    return this.animalRepository.findByName(name);
+  }
 }
 
 export { AnimalService };

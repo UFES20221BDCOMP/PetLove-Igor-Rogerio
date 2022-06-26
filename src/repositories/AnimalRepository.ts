@@ -14,12 +14,13 @@ class AnimalRepository implements IAnimalRepository {
 
   }
 
-  findByName(name: string): Animal {
-    return null;
+  async findByName(name: string): Promise<Animal[]> {
+    const animals = await this.repository.query('SELECT * FROM public."Animal" as animal where animal.name ILIKE $1',[name]);
+    return animals;
   }
 
-  findByOwner(person: Person): Animal[] {
-    return null;
+  async findByOwner(person: Person): Promise<Animal[]> {
+    return await this.repository.query('SELECT * FROM (public."Animal" as A natural join public."Person" as P) where P.name ILIKE $person.name',[person.name])
   }
 
   async create({
@@ -29,16 +30,14 @@ class AnimalRepository implements IAnimalRepository {
     type,
     id,
   }: ICreateAnimalDTO) {
-    console.log("Comecei");
     const animals = await this.repository.create({name,cost,owner,type});
-    console.log("To aqui");
-    console.log(animals);
-    console.log("Passei");
+    
     await this.repository.save(animals);
   }
 
   async list(): Promise<Animal[]> {
     const animals = await this.repository.query('SELECT * FROM public."Animal"');
+    console.log(animals);
     return animals;
   }
 }
