@@ -2,7 +2,7 @@
     "type" : "postgres",
     "host" : "localhost",
     "port" : 5432,
-    "username" : "docker",
+    "username" : "petlove",
     "password" : "petlove",
     "database" : "petlove",
     "migrations": ["./src/database/migrations/*.ts"],

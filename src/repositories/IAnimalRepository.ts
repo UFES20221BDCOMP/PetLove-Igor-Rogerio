@@ -4,7 +4,7 @@ import { Person } from '../model/Person';
 interface ICreateAnimalDTO {
   name: string;
   type: string;
-  owner: string;
+  owner: Person;
   cost: number;
   id?: string;
 }

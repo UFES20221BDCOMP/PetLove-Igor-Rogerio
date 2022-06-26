@@ -4,16 +4,11 @@ import { AnimalRepository } from '../repositories/AnimalRepository';
 
 import { AnimalService } from "../service/AnimalService";
 
-class AnimalController {
-    animalService: AnimalService;
-    animalRepository: AnimalRepository;
-    constructor(){
-        this.animalRepository = new AnimalRepository();
-        this.animalService = new AnimalService(this.animalRepository);
+class CreateAnimalController {
+    constructor(private animalService:AnimalService){
     }
-    create(request: Request, response: Response): Response{
+    handle(request: Request, response: Response): Response{
         const { name, cost, type, owner} = request.body;
-        
         this.animalService.create({name, cost, type, owner});
 
         return response.status(201).send();
@@ -23,4 +18,11 @@ class AnimalController {
     }
 }
 
-export {AnimalController}
+class ListAnimalController {
+    constructor(private animalService:AnimalService){
+    }
+    handle(): Promise<Animal[]>{
+        return this.animalService.list();
+    }
+}
+export {CreateAnimalController,ListAnimalController}

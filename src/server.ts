@@ -3,11 +3,14 @@
  *  Rogério Medeiros - 
 */
 import express from 'express';
+import  { AppDataSource }  from "./database";
 import "reflect-metadata";
 import "./database"
 
 import { animalsRoutes } from './routes/animals.routes';
 import { personsRoutes } from './routes/persons.routes';
+
+
 
 const app = express();
 app.use(express.json());

@@ -1,11 +1,12 @@
 import { Animal } from 'model/Animal';
+import { Person } from 'model/Person';
 import { AnimalRepository } from '../repositories/AnimalRepository';
 import { IAnimalRepository, ICreateAnimalDTO } from '../repositories/IAnimalRepository';
 
 interface IRequest {
   name: string;
   cost: number;
-  owner: string;
+  owner: Person;
   type: string;
 }
 
