@@ -3,7 +3,7 @@ import { Connection, createConnection, getConnectionOptions, DataSource } from "
 
 const AppDataSource = new DataSource({
   type : "postgres",
-  host : "localhost",
+  host : "database_petlove",
   synchronize: true,
   port : 5432,
   username : "petlove",
