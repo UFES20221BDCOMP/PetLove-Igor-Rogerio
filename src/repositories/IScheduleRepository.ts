@@ -4,28 +4,26 @@ import { Schedule } from '../model/Schedule';
 import { Service } from '../model/Service';
 
 interface ICreateScheduleDTO {
-  service: string;
-  animal: string;
+  serviceId: string;
+  animalId: string;
+  date: string;
   owner: string;
-  date: Date;
   id?: string;
 }
 
 interface IScheduleRepository {
-  findByAnimal(animal: string): Schedule[];
-  findByOwner(owner: string): Schedule[];
-  findByService(Service: string): Schedule[];
-  findByDate(dateBegin: Date, DateEnd: Date): Schedule[];
+  findByAnimal(animal: string): Promise<Schedule[]>;
+  findByOwner(owner: string): Promise<Schedule[]>;
+  findByService(service: string): Promise<Schedule[]>;
+  findByDate(dateBegin: string, DateEnd: string): Promise<Schedule[]>;
   list(
-    owner?: string,
     animal?: string,
-    service?: string,
-    dateBegin?: Date,
-    dateEnd?: Date): Schedule[];
+    serviceId?: string,
+    dateBegin?: string,
+    dateEnd?: string): Promise<Schedule[]>;
   create({
-    service,
-    animal,
-    owner,
+    serviceId,
+    animalId,
     date,
     id,
   }: ICreateScheduleDTO)

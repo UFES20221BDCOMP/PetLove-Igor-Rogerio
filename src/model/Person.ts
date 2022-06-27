@@ -3,23 +3,18 @@ import { Entity, PrimaryColumn, Column } from "typeorm";
 
 @Entity('Person')
 class Person {
-  @PrimaryColumn("uuid")
-  id: string;
+  //@PrimaryColumn("uuid")
+  //id: string;
 
   @Column()
   name: string;
 
-  @Column()
+  @PrimaryColumn({unique : true})
   doc: string;
 
-  @Column({type: 'date'})
+  @Column()
   birthDate: string;
 
-  constructor() {
-    if (!this.id) {
-      this.id = uuidV4();
-    }
-  }
 }
 
 export { Person };

@@ -1,25 +1,20 @@
 import { Router } from 'express';
 
-import { Person } from '../model/Person';
-import { PersonRepository } from '../repositories/PersonRepository';
-import { PersonService } from '../service/PersonService';
+import PersonController  from '../controller/IndexPerson';
 
 const personsRoutes = Router();
-const personRepository = new PersonRepository();
 
 personsRoutes.post('/', (request, response) => {
-  const { name, doc, birthDate } = request.body;
-  const createPersonService = new PersonService(personRepository);
-  createPersonService.execute({ name, doc, birthDate });
-
-  return response.status(201).send();
+  PersonController().handle(request, response);
+  return response.send(201);
 });
 
-// -- Retornar do banco de dados
-personsRoutes.get('/', (request, response) => {
-  const all = personRepository.list();
+personsRoutes.get('/', async (request, response) => {
+  return response.json(await PersonController().list()).send();
+});
 
-  return response.json(all);
+personsRoutes.get('/:name/', async (request, response) => {
+  return response.json(await PersonController().list()).send();
 });
 
 export { personsRoutes };

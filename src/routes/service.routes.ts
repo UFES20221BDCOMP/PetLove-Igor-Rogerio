@@ -1,30 +1,16 @@
 import { Router } from 'express';
 
-import { ServiceRepository } from '../repositories/ServiceRepository';
-// import { CreateAnimalService } from '../service/CreateAnimalService';
+import ServiceController  from '../controller/IndexService';
 
-const serviceRoutes = Router();
+const servicesRoutes = Router();
 
-const serviceRepository = new ServiceRepository();
-
-/*
-serviceRoutes.post('/', (request, response) => {
-  const {
-    name, cost, type, owner,
-  } = request.body;
-  const createPersonService = new CreateServiceService(serviceRepository);
-  createPersonService.execute({
-    name, cost, type, owner,
-  });
-
-  return response.status(201).send();
-});
-*/
-
-serviceRoutes.get('/', (request, response) => {
-  const all = serviceRepository.list();
-
-  return response.json(all);
+servicesRoutes.post('/', (request, response) => {
+  return ServiceController().handle(request, response);
 });
 
-export { serviceRoutes };
+// -- Retornar do banco de dados
+servicesRoutes.get('/', async (request, response) => {
+  return response.json(await ServiceController().list()).send();
+});
+
+export { servicesRoutes };

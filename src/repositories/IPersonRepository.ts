@@ -3,14 +3,14 @@ import { Person } from '../model/Person';
 interface ICreatePersonDTO {
   name: string;
   doc: string;
-  birthDate: Date;
+  birthDate: string;
   id?: string;
 }
 
 interface IPersonRepository {
-  findByName(name: string): Person;
-  findByDoc(doc: string);
-  list(): Person[];
+  findByName(name: string): Promise<Person>;
+  findByDoc(doc: string): Promise<Person[]>;
+  list(): Promise<Person[]>;
   create({
     name, doc, birthDate, id,
   }: ICreatePersonDTO): void;

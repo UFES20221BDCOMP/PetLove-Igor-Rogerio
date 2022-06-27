@@ -20,5 +20,8 @@ class AnimalController {
         console.log("body", name);
         return this.animalService.findByName(name);
     }
+    async findAnimalOwner(name: string, owner: string): Promise<string>{
+        return await this.animalService.findByAnimalOwner(name, owner);
+    }
 }
 export {AnimalController}

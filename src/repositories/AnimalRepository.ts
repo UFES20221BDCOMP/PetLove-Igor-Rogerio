@@ -20,7 +20,7 @@ class AnimalRepository implements IAnimalRepository {
   }
 
   async findByOwner(person: Person): Promise<Animal[]> {
-    return await this.repository.query('SELECT * FROM (public."Animal" as A natural join public."Person" as P) where P.name ILIKE $person.name',[person.name])
+    return await this.repository.query('SELECT * FROM (public."Animal" as A natural join public."Person" as P) where P.name ILIKE $1',[person.name])
   }
 
   async create({
@@ -30,6 +30,7 @@ class AnimalRepository implements IAnimalRepository {
     type,
     id,
   }: ICreateAnimalDTO) {
+    
     const animals = await this.repository.create({name,cost,owner,type});
     
     await this.repository.save(animals);
@@ -37,8 +38,24 @@ class AnimalRepository implements IAnimalRepository {
 
   async list(): Promise<Animal[]> {
     const animals = await this.repository.query('SELECT * FROM public."Animal"');
-    console.log(animals);
+
     return animals;
+  }
+
+  async findByOwnerName(person: string, name: string): Promise<Animal[]>{
+    console.log(person);
+    const animal = await this.repository.query('SELECT * FROM public."Animal" as A where'
+                                      + ' A.name ILIKE $1 and A."ownerDoc" = $2',[name,person]);
+    console.log(animal);
+                                      
+    return animal;
+  }
+
+  async findByAnimalOwner(name: string, owner: string): Promise<Animal[]>{
+    const animal = await this.repository.query('SELECT * FROM public."Animal" as A where'
+                                      + ' A.name ILIKE $1 and A."ownerDoc" = $2',[name, owner]);
+    console.log(animal);
+    return animal;
   }
 }
 export { AnimalRepository };

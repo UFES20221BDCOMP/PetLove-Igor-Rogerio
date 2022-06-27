@@ -6,27 +6,34 @@ import { IAnimalRepository, ICreateAnimalDTO } from '../repositories/IAnimalRepo
 interface IRequest {
   name: string;
   cost: number;
-  owner: Person;
+  owner: string;
   type: string;
 }
 
 class AnimalService {
   constructor(private animalRepository: IAnimalRepository) { }
-  create({
+  
+  async create({
     name, cost, owner, type,
-  }: IRequest): void {
-    this.animalRepository.create({
-      name,
-      cost,
-      owner,
-      type,
-    });
-    console.log({
-      name,
-      cost,
-      owner,
-      type,
-    });
+  }: IRequest){
+    const animal = await this.animalRepository.findByOwnerName(owner,name);
+
+    
+    try {
+      if(animal.length !== 0){
+        throw new Error("O dono ja possui um animal com esse nome.")
+      }
+      this.animalRepository.create({
+        name,
+        cost,
+        owner,
+        type,
+      });
+    } catch (error) {
+      console.log(error);
+      
+    }
+
   }
 
   list():Promise<Animal[]>{
@@ -35,6 +42,19 @@ class AnimalService {
 
   findByName(name){
     return this.animalRepository.findByName(name);
+  }
+
+  async findByAnimalOwner(name, owner): Promise<string>{
+    const animal = await this.animalRepository.findByAnimalOwner(name, owner);
+    try {
+      if(animal.length === 0 ){
+        throw new Error("Animal não cadastrado.");
+      }
+      
+    } catch (error) {
+      throw error;
+    }
+    return animal[0].id;
   }
 }
 

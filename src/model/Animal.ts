@@ -21,7 +21,7 @@ class Animal {
   type: string;
 
   @ManyToOne(type=>Person)
-  owner: Person;
+  owner: string;
 
   constructor() {
     if (!this.id) {

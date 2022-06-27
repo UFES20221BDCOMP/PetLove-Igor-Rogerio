@@ -1,42 +1,18 @@
 import { Router } from 'express';
 
-import { Schedule } from '../model/Schedule';
-import { ScheduleRepository } from '../repositories/ScheduleRepository';
-import { ScheduleService } from '../service/ScheduleService';
+import scheduleController from "../controller/IndexSchedule";
 
 const scheduleRoutes = Router();
 
-const scheduleRepository = new ScheduleRepository();
 
 scheduleRoutes.post('/', (request, response) => {
-  const {
-    service,
-    animal,
-    owner,
-    date,
-  } = request.body;
-  const createPersonService = new ScheduleService(scheduleRepository);
-  createPersonService.execute({
-    service,
-    animal,
-    owner,
-    date,
-  });
+  scheduleController().handle(request,response);
 
   return response.status(201).send();
 });
 
-scheduleRoutes.get('/', (request, response) => {
-  const {
-    service,
-    animal,
-    owner,
-    date,
-  } = request.body;
-
-  const all = scheduleRepository.list();
-
-  return response.json(all);
+scheduleRoutes.get('/', async (request, response) => {
+  return response.json(await scheduleController().list(request, response)).send();
 });
 
 export { scheduleRoutes };

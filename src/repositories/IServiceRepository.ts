@@ -8,8 +8,8 @@ interface ICreateServiceDTO {
 }
 
 interface IServiceRepository {
-  findByName(name: string): Service;
-  list(): Service[];
+  findByName(name: string): Promise<Service[]>;
+  list(): Promise<Service[]>;
   create({
     name,
     value,

@@ -1,26 +1,32 @@
+import { Request } from 'express';
+import { Schedule } from 'model/Schedule';
 import { IScheduleRepository, ICreateScheduleDTO } from '../repositories/IScheduleRepository';
-import { ScheduleRepository } from '../repositories/ScheduleRepository';
 
 interface IRequest {
-  service: string;
-  animal: string;
+  serviceId: string;
+  animalId: string;
   owner: string;
-  date: Date;
+  date: string;
   id?: string;
 }
 
 class ScheduleService {
-  constructor(private personRepository: IScheduleRepository) { }
-  execute({
-    service, animal, owner, date,
+  constructor(private scheduleRepository: IScheduleRepository) { }
+  create({
+    serviceId, animalId, owner, date,
   }: IRequest): void {
-    this.personRepository.create({
-      service, animal, owner, date,
+    this.scheduleRepository.create({
+      serviceId, animalId, owner, date,
     });
-    console.log({
-      service, animal, owner, date,
-    });
+
+  }
+
+  async list(request:Request): Promise<Schedule[]>{
+//    const {owner, animal, dateBegin, dateEnd} = request.params;
+    return await this.scheduleRepository.list();
   }
 }
 
 export { ScheduleService };
+
+//"2019/03/05" > "2020/05/03"

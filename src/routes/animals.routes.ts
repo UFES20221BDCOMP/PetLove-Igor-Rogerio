@@ -1,20 +1,21 @@
 import  createAnimalController  from '../controller/IndexAnimal';
 import { request, Router } from 'express';
 
-
 const animalsRoutes = Router();
 
 animalsRoutes.post('/', (request, response) => {
   return createAnimalController().handle(request,response);
 });
 
-animalsRoutes.get('/', (request, response) => {
-  return createAnimalController().list();
+animalsRoutes.get('/', async (request, response) => {
+  return response.json(await createAnimalController().list()).send();
 });
 
-animalsRoutes.get('/:name/',(request, response) => {
+animalsRoutes.get('/:name/',async (request, response) => {
   const name = request.params['name'];
-  return response.json(createAnimalController().findByName(name));
+  const animals = await createAnimalController().findByName(name);
+  console.log(animals)
+  return response.send(animals);
 });
 
 export { animalsRoutes };

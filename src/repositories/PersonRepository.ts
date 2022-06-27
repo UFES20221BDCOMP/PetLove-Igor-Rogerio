@@ -1,36 +1,38 @@
+import { DataSource, Repository } from 'typeorm';
 import { Person } from '../model/Person';
+
 import { IPersonRepository, ICreatePersonDTO } from './IPersonRepository';
+import { AppDataSource } from '../database';
 
 class PersonRepository implements IPersonRepository {
-  private persons: Person[];
+  private repository: Repository<Person>;
 
   constructor() {
-    this.persons = [];
+    this.repository = AppDataSource.getRepository(Person);
   }
 
-  create({
+  async create({
     name, doc, birthDate, id,
-  }: ICreatePersonDTO): void {
-    const person = new Person();
+  }: ICreatePersonDTO) {
+    const myDate = new Date(birthDate);
+    const person = await this.repository.create({name, doc, birthDate});
 
-    Object.assign(person, {
-      name, doc, birthDate,
-    });
-
-    this.persons.push(person);
+    await this.repository.save(person);
   }
 
-  findByName(name): Person {
-    // TODO
-    return null;
+  async findByName(name: string): Promise<Person> {
+    const person = await this.repository.query('SELECT * FROM public."Person" as P where P.name ILIKE $1',[name]);
+    return person;
   }
 
-  findByDoc(): Person {
-    return null;
+  async findByDoc(doc: string): Promise<Person[]> {
+    const person = await this.repository.query('SELECT * FROM public."Person" as P where P.doc ILIKE $1',[doc]);
+    console.log(person);
+    return person;
   }
 
-  list(): Person[] {
-    return this.persons;
+  list(): Promise<Person[]> {
+    return this.repository.query('SELECT * FROM public."Person"');
   }
 }
 export { PersonRepository };
