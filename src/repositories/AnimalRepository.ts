@@ -57,5 +57,9 @@ class AnimalRepository implements IAnimalRepository {
     console.log(animal);
     return animal;
   }
+
+  delete(id: string): void{
+    this.repository.delete(id);
+  }
 }
 export { AnimalRepository };

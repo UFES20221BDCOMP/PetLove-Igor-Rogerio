@@ -5,6 +5,9 @@ import { ServiceRepository } from '../repositories/ServiceRepository';
 import { ServiceService } from "../service/ServiceService";
 
 class ServiceController {
+    delete(name: string): void {
+        this.serviceService.delete(name);
+    }
     constructor(private serviceService:ServiceService){
     }
     handle(request: Request, response: Response): Response{

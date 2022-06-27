@@ -6,6 +6,9 @@ import { ScheduleService } from "../service/ScheduleService";
 import ServiceController  from './IndexService';
 
 class ScheduleController {
+    delete(name: string): void {
+        this.scheduleService.delete(name);
+    }
     constructor(private scheduleService:ScheduleService){
     }
     async handle(request: Request, response: Response): Promise<Response>{

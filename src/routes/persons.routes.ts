@@ -6,15 +6,17 @@ const personsRoutes = Router();
 
 personsRoutes.post('/', (request, response) => {
   PersonController().handle(request, response);
-  return response.send(201);
+  return response.send(200);
 });
 
 personsRoutes.get('/', async (request, response) => {
   return response.json(await PersonController().list()).send();
 });
 
-personsRoutes.get('/:name/', async (request, response) => {
-  return response.json(await PersonController().list()).send();
+personsRoutes.delete('/', async (request, response) => {
+  await PersonController().delete(request.body);
+  return response.send(200);
 });
+
 
 export { personsRoutes };

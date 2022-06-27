@@ -15,6 +15,6 @@ interface IServiceRepository {
     value,
     id,
   }: ICreateServiceDTO)
-
+  delete(id: string): void;
 }
 export { IServiceRepository, ICreateServiceDTO };

@@ -10,7 +10,9 @@ interface IRequest {
 
 class ServiceService {
   constructor(private serviceRepository: IServiceRepository) { }
-
+  delete(id: string) {
+    this.serviceRepository.delete(id);
+  }
   async create({ name, value }: IRequest) {
     const serviceAlreadyExists = await this.serviceRepository.findByName(name);
     try {

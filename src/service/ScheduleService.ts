@@ -12,6 +12,10 @@ interface IRequest {
 
 class ScheduleService {
   constructor(private scheduleRepository: IScheduleRepository) { }
+  delete(id: string) {
+    this.scheduleRepository.delete(id);
+  }
+
   create({
     serviceId, animalId, owner, date,
   }: IRequest): void {

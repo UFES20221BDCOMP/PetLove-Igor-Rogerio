@@ -5,6 +5,9 @@ import { PersonRepository } from '../repositories/PersonRepository';
 import { PersonService } from "../service/PersonService";
 
 class PersonController {
+    delete(name: string): void {
+        this.personService.delete(name);
+    }
     constructor(private personService:PersonService){
     }
     handle(request: Request, response: Response): Response{

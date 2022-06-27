@@ -9,10 +9,10 @@ class Schedule {
   @PrimaryColumn("uuid")
   id: string;
 
-  @ManyToOne(type=>Animal)
+  @ManyToOne(type=>Animal,{ onDelete: 'CASCADE' })
   animal: string;
 
-  @ManyToOne(type=>Service)
+  @ManyToOne(type=>Service,{ onDelete: 'CASCADE' })
   service: string;
 
   @Column({type: 'date'})

@@ -34,5 +34,9 @@ class PersonRepository implements IPersonRepository {
   list(): Promise<Person[]> {
     return this.repository.query('SELECT * FROM public."Person"');
   }
+
+  delete(id: string): void{
+    this.repository.delete(id);
+  }
 }
 export { PersonRepository };

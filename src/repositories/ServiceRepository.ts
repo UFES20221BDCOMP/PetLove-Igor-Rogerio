@@ -28,5 +28,9 @@ class ServiceRepository implements IServiceRepository {
   async list(): Promise<Service[]> {
     return await this.repository.query('SELECT * FROM public."Service"');
   }
+
+  delete(id: string): void{
+    this.repository.delete(id);
+  }
 }
 export { ServiceRepository };

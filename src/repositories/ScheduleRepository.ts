@@ -35,6 +35,10 @@ class ScheduleRepository implements IScheduleRepository {
   async list():  Promise<Schedule[]> {
     return await this.repository.query('SELECT * FROM public."Schedule"');
   }
+
+  delete(id: string): void{
+    this.repository.delete(id);
+  }
 }
 
 export { ScheduleRepository };

@@ -11,6 +11,9 @@ interface IRequest {
 }
 
 class AnimalService {
+  delete(id: string) {
+      this.animalRepository.delete(id);
+  }
   constructor(private animalRepository: IAnimalRepository) { }
   
   async create({

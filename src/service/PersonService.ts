@@ -10,6 +10,9 @@ interface IRequest {
 
 class PersonService {
   constructor(private personRepository: IPersonRepository) { }
+  delete(id: string) {
+    this.personRepository.delete(id);
+  }
 
   async create({ name, doc, birthDate }: IRequest) {
     const personAlreadyExists = await this.personRepository.findByDoc(doc);

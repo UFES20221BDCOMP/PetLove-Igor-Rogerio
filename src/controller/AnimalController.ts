@@ -5,6 +5,9 @@ import { AnimalRepository } from '../repositories/AnimalRepository';
 import { AnimalService } from "../service/AnimalService";
 
 class AnimalController {
+    delete(name: string) {
+      this.animalService.delete(name);
+    }
     constructor(private animalService:AnimalService){
     }
     handle(request: Request, response: Response): Response{

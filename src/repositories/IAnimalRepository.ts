@@ -22,5 +22,6 @@ interface IAnimalRepository {
     id,
   }: ICreateAnimalDTO)
   findByAnimalOwner(name: string, owner: string) : Promise<Animal[]>;
+  delete(id: string): void;
 }
 export { IAnimalRepository, ICreateAnimalDTO };

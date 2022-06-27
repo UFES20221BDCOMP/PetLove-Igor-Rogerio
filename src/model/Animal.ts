@@ -20,7 +20,7 @@ class Animal {
   @Column()
   type: string;
 
-  @ManyToOne(type=>Person)
+  @ManyToOne(type=>Person,{ onDelete: 'CASCADE' })
   owner: string;
 
   constructor() {

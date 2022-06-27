@@ -27,6 +27,6 @@ interface IScheduleRepository {
     date,
     id,
   }: ICreateScheduleDTO)
-
+  delete(id: string): void;
 }
 export { IScheduleRepository, ICreateScheduleDTO };

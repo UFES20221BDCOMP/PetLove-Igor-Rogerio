@@ -18,4 +18,10 @@ animalsRoutes.get('/:name/',async (request, response) => {
   return response.send(animals);
 });
 
+animalsRoutes.delete('/',async (request, response) => {
+  await createAnimalController().delete(request.body);
+
+  return response.send(200);
+});
+
 export { animalsRoutes };

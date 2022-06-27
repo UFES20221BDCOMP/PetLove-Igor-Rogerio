@@ -14,5 +14,6 @@ interface IPersonRepository {
   create({
     name, doc, birthDate, id,
   }: ICreatePersonDTO): void;
+  delete(id: string): void;
 }
 export { IPersonRepository, ICreatePersonDTO };
