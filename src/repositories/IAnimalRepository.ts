@@ -5,18 +5,18 @@ interface ICreateAnimalDTO {
   name: string;
   type: string;
   owner: string;
-  cost: number;
   id?: string;
 }
 
 interface IAnimalRepository {
+  findByType(type: string):Promise<Animal[]>;
+  calcCostName(name: string): Promise<number>;
   findByName(name: string): Promise<Animal[]>;
   findByOwner(person: Person): Promise<Animal[]>;
   findByOwnerName(person: string,name: string): Promise<Animal[]>;
   list(): Promise<Animal[]>;
   create({
     name,
-    cost,
     type,
     owner,
     id,

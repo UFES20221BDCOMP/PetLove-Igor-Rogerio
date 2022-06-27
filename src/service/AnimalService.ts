@@ -11,6 +11,12 @@ interface IRequest {
 }
 
 class AnimalService {
+  async findByType(type:string): Promise<Animal[]>{
+
+      const animals = await this.animalRepository.findByType(type);
+      await this.calcCostTotal(animals);
+      return animals;
+  }
   delete(id: string) {
       this.animalRepository.delete(id);
   }
@@ -28,7 +34,6 @@ class AnimalService {
       }
       this.animalRepository.create({
         name,
-        cost,
         owner,
         type,
       });
@@ -39,12 +44,37 @@ class AnimalService {
 
   }
 
-  list():Promise<Animal[]>{
-    return this.animalRepository.list();
+  async list():Promise<Animal[]>{
+    const animals = await this.animalRepository.list();
+    
+    const total = await this.calcCostTotal(animals);
+    return animals;
   }
 
-  findByName(name){
-    return this.animalRepository.findByName(name);
+  async calcCostTotal(animals){
+    var total = 0;
+    for(var i = 0; i< animals.length; i++ ){
+      const a = animals[i];
+      const cost = await this.animalRepository.calcCostName(a.id);
+      total += cost[0].sum;
+      a.cost = cost[0].sum;
+      console.log("Animal depois",a);
+      
+    }
+    return total;
+  }
+
+  async findByName(name){
+    const animal = await this.animalRepository.findByName(name);
+    if(animal.length !==0 ){
+      await animal.forEach(async (a) => {
+        a.cost = await this.animalRepository.calcCostName(a.id);
+      });
+
+    }
+    console.log(animal);
+    
+    return animal;
   }
 
   async findByAnimalOwner(name, owner): Promise<string>{

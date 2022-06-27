@@ -14,7 +14,7 @@ class Animal {
   @Column()
   name: string;
 
-  @Column()
+  @Column({nullable:true})
   cost: number;
 
   @Column()

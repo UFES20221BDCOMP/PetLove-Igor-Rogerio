@@ -7,11 +7,21 @@ import { IAnimalRepository, ICreateAnimalDTO } from './IAnimalRepository';
 import { response } from 'express';
 
 class AnimalRepository implements IAnimalRepository {
+
   private repository: Repository<Animal>;
 
   constructor() {
     this.repository = AppDataSource.getRepository(Animal);
 
+  }
+
+  async calcCostName(id: string): Promise<number>{
+    return await this.repository.query('SELECT sum(s.value) from public."Schedule" as sc join public."Animal" as a on sc."animalId" = a.id ' +
+                                        'join public."Service" as S on sc."serviceId" = s.id where a.id = $1',[id]);
+  }
+
+  async findByType(type: string):Promise<Animal[]>{
+    return await this.repository.query('SELECT * FROM public."Animal" where type ILIKE $1',[type]);
   }
 
   async findByName(name: string): Promise<Animal[]> {
@@ -20,18 +30,16 @@ class AnimalRepository implements IAnimalRepository {
   }
 
   async findByOwner(person: Person): Promise<Animal[]> {
-    return await this.repository.query('SELECT * FROM (public."Animal" as A natural join public."Person" as P) where P.name ILIKE $1',[person.name])
+    return await this.repository.query('SELECT * FROM (public."Animal" as A join public."Person" as P on doc="ownerDoc"P) where P.name ILIKE $1',[person.name])
   }
 
   async create({
     name,
-    cost,
     owner,
     type,
-    id,
   }: ICreateAnimalDTO) {
     
-    const animals = await this.repository.create({name,cost,owner,type});
+    const animals = await this.repository.create({name,owner,type});
     
     await this.repository.save(animals);
   }
