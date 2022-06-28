@@ -45,7 +45,7 @@ yarn add ts-node-dev
 Com a dependência baixada, basta executar o Docker
 ```bash
 # Executar container Docker
-> docker-compose up -d
+docker-compose up -d
 ```
 A porta a qual a aplicação foi atribuida é a `localhost:3333`.
 
@@ -72,10 +72,8 @@ Root
      └─── server.ts - Aplicação principal.
        └─── controller - Onde os requests são mapeados.
        └─── database - Onde estão as migrations e a definição do banco.
-
        └─── model - Entidades da aplicação.
        └─── repositories - Interface que conecta com o banco de dados.
-
        └─── routes - Rotas da aplicação
        └─── service - A lógica entre o controlador e os repositórios.
 ```
