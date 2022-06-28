@@ -32,7 +32,17 @@ Antes de começar, verifique se você atendeu aos seguintes requisitos:
 # Clonar pasta do projeto
 > git clone https://github.com/UFES20221BDCOMP/PetLove-Igor-Rogerio.git
 ```
-Com o projeto clonado, dê o seguinte comando na pasta raiz do projeto
+Com o projeto clonado, precisamos agora baixar a dependência "ts-node-dev", era responsabilidade do docker fazer isso mas imaginamos que, por algum problema de versão, não está fazendo.
+```bash
+# Instalar ts-node-dev
+npm install ts-node-dev
+```
+ou
+```bash
+# Instalar ts-node-dev
+yarn add ts-node-dev
+```
+Com a dependência baixada, basta executar o Docker
 ```bash
 # Executar container Docker
 > docker-compose up -d
@@ -93,7 +103,7 @@ Alguns itens abaixo poderiam contribuir para uma melhoria no projeto, são eles:
 
 # 📚 Testes com a Aplicação
 
-O diretório `test` contém a exportação do Insomnia, com todos os requests implementados. Também tem um [documento](/test/introdução.txt) ao qual diz como importar esse arquivo e possui as rotas alguns exemplos.
+O diretório `test` contém a exportação do Insomnia, com todos os requests implementados. Também tem um [documento](/test/instrução.txt) ao qual diz como importar esse arquivo e possui as rotas alguns exemplos.
 
 <br/>
 
