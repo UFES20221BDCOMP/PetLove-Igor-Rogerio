@@ -12,7 +12,7 @@ class Service {
   @Column()
   value: number;
 
-  constructor() {
+  constructor() { /* Ao inicializar, atribui uma chave uuiv4 a entidade */
     if (!this.id) {
       this.id = uuidV4();
     }

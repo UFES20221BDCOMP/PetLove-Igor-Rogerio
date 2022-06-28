@@ -8,6 +8,7 @@ interface IRequest {
   id?: string;
 }
 
+/* Lógica entre o controlador e o respositório */
 class ServiceService {
   constructor(private serviceRepository: IServiceRepository) { }
   delete(id: string) {
@@ -16,8 +17,7 @@ class ServiceService {
   async create({ name, value }: IRequest) {
     const serviceAlreadyExists = await this.serviceRepository.findByName(name);
     try {
-      if(serviceAlreadyExists.length == 0) {
-        console.log('Agora to aqui');
+      if(serviceAlreadyExists.length == 0) {  /* Verifica se o serviço ja existe no banco */
         this.serviceRepository.create({ name, value });
       }
       throw new Error('Service already exists');
@@ -34,7 +34,7 @@ class ServiceService {
   async findId(name: string): Promise<string>{
     const service = await this.serviceRepository.findByName(name);
     try {
-      if(service.length === 0 ){
+      if(service.length === 0 ){ /* Verifica se o serviço ja existe no banco */
         throw new Error("Serviço não cadastrado.");
       }
       

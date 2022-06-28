@@ -14,8 +14,8 @@ class Animal {
   @Column()
   name: string;
 
-  @Column({nullable:true})
-  cost: number;
+  // @Column({nullable:true})
+  // cost: number;
 
   @Column()
   type: string;
@@ -23,7 +23,7 @@ class Animal {
   @ManyToOne(type=>Person,{ onDelete: 'CASCADE' })
   owner: string;
 
-  constructor() {
+  constructor() { /* Ao inicializar, atribui uma chave uuiv4 a entidade */
     if (!this.id) {
       this.id = uuidV4();
     }

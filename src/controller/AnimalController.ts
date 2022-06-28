@@ -3,7 +3,11 @@ import { Animal } from 'model/Animal';
 
 import { AnimalService } from "../service/AnimalService";
 
+/* Onde os requests são mapeados */
 class AnimalController {
+    async findQtt(arg0: { animalName: any; animalType: any; personName: any; dateBegin: any; dateEnd: any; serviceName: any; }) {
+        return await this.animalService.findQtt(arg0);
+    }
     async findOwners(type: string) {
         const animals = this.findByType(type);
         const owners= [];
@@ -36,14 +40,8 @@ class AnimalController {
         return await this.animalService.findByType(type);
     }
 
-    async calcMedia(animals:Promise<Animal[]>): Promise<number>{
-        var total = 0;
-        
-        for(var i = 0;i < (await animals).length; i++){
-            total+=animals[i].cost;
-        }
-        
-        return total/(await animals).length;
+    async calcMedia({animalName,animalType,personName,dateBegin,dateEnd,serviceName}): Promise<number>{
+        return this.animalService.calcMedia({animalName,animalType,personName,dateBegin,dateEnd,serviceName});
     }
 }
 export {AnimalController}

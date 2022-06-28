@@ -5,6 +5,7 @@ import  AnimalController  from './IndexAnimal';
 import { ScheduleService } from "../service/ScheduleService";
 import ServiceController  from './IndexService';
 
+/* Onde os requests são mapeados */
 class ScheduleController {
     delete(name: string): void {
         this.scheduleService.delete(name);

@@ -4,6 +4,10 @@ import PersonController  from '../controller/IndexPerson';
 
 const personsRoutes = Router();
 
+/* Define as rotas relacionadas com a entidade do tipo Person, chama os controladores com as
+ * funcionalidades e retorna um JSON como resposta. 
+ */
+
 personsRoutes.post('/', (request, response) => {
   PersonController().handle(request, response);
   return response.send(200);

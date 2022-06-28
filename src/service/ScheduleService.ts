@@ -10,6 +10,7 @@ interface IRequest {
   id?: string;
 }
 
+/* Lógica entre o controlador e o respositório */
 class ScheduleService {
   constructor(private scheduleRepository: IScheduleRepository) { }
   delete(id: string) {

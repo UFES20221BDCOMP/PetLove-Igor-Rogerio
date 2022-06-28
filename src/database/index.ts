@@ -1,6 +1,7 @@
 import { Animal } from "../model/Animal";
 import { Connection, createConnection, getConnectionOptions, DataSource } from "typeorm";
 
+/* Definição do datasource do banco postgres */
 const AppDataSource = new DataSource({
   type : "postgres",
   host : "database_petlove",

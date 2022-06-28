@@ -15,10 +15,17 @@ import { questionsRoutes } from './routes/questions.routes';
 const app = express();
 app.use(express.json());
 
-app.use('/persons', personsRoutes);
-app.use('/animals', animalsRoutes);
-app.use('/services', servicesRoutes);
-app.use('/schedules', scheduleRoutes);
-app.use('/questions', questionsRoutes);
+/* Define as rotas pertencentes a nossa API */
+try {
+    app.use('/persons', personsRoutes);
+    app.use('/animals', animalsRoutes);
+    app.use('/services', servicesRoutes);
+    app.use('/schedules', scheduleRoutes);
+    app.use('/questions', questionsRoutes);
+    
+} catch (error) {
+    console.log(error);
+}
 
+/* Porta a qual nossa aplicação irá rodar */
 app.listen(3333, () => console.log('✨ Server is run on port 3333'));

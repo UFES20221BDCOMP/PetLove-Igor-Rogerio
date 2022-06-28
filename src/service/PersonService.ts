@@ -8,6 +8,7 @@ interface IRequest {
   birthDate: string;
 }
 
+/* Lógica entre o controlador e o respositório */
 class PersonService {
   constructor(private personRepository: IPersonRepository) { }
   delete(id: string) {
@@ -17,11 +18,9 @@ class PersonService {
   async create({ name, doc, birthDate }: IRequest) {
     const personAlreadyExists = await this.personRepository.findByDoc(doc);
     try {
-      if(personAlreadyExists.length == 0) {
-        console.log('Agora to aqui');
+      if(personAlreadyExists.length == 0) { /* Verifica se a pessoa ja existe no banco */
         this.personRepository.create({ name, doc, birthDate });
       }
-      console.log('To aqui');
       throw new Error('Person already exists');
     }
     catch{

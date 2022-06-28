@@ -1,0 +1,119 @@
+Para realizar os testes, é necessário utilizar o Insomnia e importar a configuração "Insomnia_2022-06-27.json".
+Para isso, basta ir na engrenagem no canto superior direito, selecionar "Data", "Import Data" e selecionar o arquivo.
+
+Deixamos aqui embaixo alguns exemplos de entrada para a utilização na aplicação.
+Obs: O sistema não está fazendo controle de erro, caso ocorra algum erro por violação de chave extrangeira 
+(adicionou algum campo sem existir uma referencia pra ele) deve reiniciar a aplicação.
+
+Também nos deparamos com um erro "Cannot remove headers after they are sent to the client" ao qual não conseguimos 
+solucionar, porém o erro realmente não tem nenhum impacto significante no sistema, conseguimos adicionar e remover as 
+entidades mesmo assim. Se o erro interferir, também devemos reiniciar a aplicação.
+
+-------------- Person (localhost:3333/persons)
+{
+	"name": "Tom Cruise",
+	"doc": "000001",
+	"birthDate": "1962/06/03"
+}
+{
+	"name": "Shrek",
+	"doc": "123789",
+	"birthDate": "1983/10/20"
+}
+{
+	"name": "Pinoquio",
+	"doc": "963852",
+	"birthDate": "1956/09/19"
+}
+{
+	"name": "Harry Potter",
+	"doc": "147258",
+	"birthDate": "1993/05/22"
+}
+{
+	"name": "Daenerys",
+	"doc": "456123",
+	"birthDate": "1993/12/13"
+}
+
+------------- Animal (localhost:3333/animals)
+Owner deve existir para cadastrar o animal.
+
+{
+	"name": "Snorlax",
+	"owner": "000001",
+	"type": "Urso"
+}
+{
+	"name": "Burro",
+	"owner": "123789",
+	"type": "Burro"
+}
+{
+	"name": "Viserion",
+	"owner": "147258",
+	"type": "Dragão"
+}
+{
+	"name": "Drogon",
+	"owner": "456123",
+	"type": "Dragão"
+}
+{
+	"name": "Rhaegal",
+	"owner": "456123",
+	"type": "Dragão"
+}
+
+---------- Serviços (localhost:3333/services)
+{
+	"name": "Banho",
+	"value": 50
+}
+{
+	"name": "Tosa",
+	"value": 100
+}
+{
+	"name": "Consulta",
+	"value": 150
+}
+{
+	"name": "Hidratação",
+	"value": 200
+}
+
+--------- Schedule (localhost:3333/schedules)
+{
+	"service": "Banho",
+	"date": "2022/02/08",
+	"animal": "Burro",
+	"owner": "123789"
+}
+{
+	"service": "Consulta",
+	"date": "2022/04/18",
+	"animal": "Drogon",
+	"owner": "456123"
+}
+{
+	"service": "Hidratação",
+	"date": "2022/03/20",
+	"animal": "Rhaegal",
+	"owner": "456123"
+}
+
+-------------- Question (localhost:3333/questions)
+
+Fizemos essa rota unicamente para empregar relações entre as tabelas.
+Nas questions temos um mecanimos de filtro, que pode filtrar pelos campos:
+animalName ,animalType,personName,dateBegin,dateEnd,serviceName
+Caso queria utilizar o filtro precisa apenas colocar o nome do campo seguido de seu valor, como mostrado nos exemplos abaixo. Caso queira 
+usar mais de um filtro basta colocar um & entre um elemento e outro.
+Tambêm é possível fazer a busca sem filtros enviado um get para a rota sem colocar nenhum dado, como no terceiro exemplo
+
+localhost:3333/questions/quantity/?animalName=Burro&personName=Shrek
+
+localhost:3333/questions/media/?animalType=Dragão
+
+localhost:3333/questions/media

@@ -9,6 +9,8 @@ interface ICreateAnimalDTO {
 }
 
 interface IAnimalRepository {
+  findQtt(arg0: { animalName: any; animalType: any; personName: any; dateBegin: any; dateEnd: any; serviceName: any; });
+  calcMedia({animalName,animalType,personName,dateBegin,dateEnd,serviceName}): Promise<number>;
   findByType(type: string):Promise<Animal[]>;
   calcCostName(name: string): Promise<number>;
   findByName(name: string): Promise<Animal[]>;

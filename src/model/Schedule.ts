@@ -18,7 +18,7 @@ class Schedule {
   @Column({type: 'date'})
   date: string;
 
-  constructor() {
+  constructor() { /* Ao inicializar, atribui uma chave uuiv4 a entidade */
     if (!this.id) {
       this.id = uuidV4();
     }

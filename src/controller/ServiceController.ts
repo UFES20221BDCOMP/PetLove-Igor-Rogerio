@@ -4,6 +4,7 @@ import { ServiceRepository } from '../repositories/ServiceRepository';
 
 import { ServiceService } from "../service/ServiceService";
 
+/* Onde os requests são mapeados */
 class ServiceController {
     delete(name: string): void {
         this.serviceService.delete(name);

@@ -10,7 +10,15 @@ interface IRequest {
   type: string;
 }
 
+/* Lógica entre o controlador e o respositório */
 class AnimalService {
+  /* Aceita qualquer tipo de filtro para calcular a quantidade */
+  async findQtt(arg0: { animalName: any; animalType: any; personName: any; dateBegin: any; dateEnd: any; serviceName: any; }) {
+      return await this.animalRepository.findQtt(arg0);
+  }
+  async calcMedia({animalName,animalType,personName,dateBegin,dateEnd,serviceName}): Promise<number> {
+      return await this.animalRepository.calcMedia({animalName,animalType,personName,dateBegin,dateEnd,serviceName});
+  }
   async findByType(type:string): Promise<Animal[]>{
 
       const animals = await this.animalRepository.findByType(type);
@@ -29,7 +37,7 @@ class AnimalService {
 
     
     try {
-      if(animal.length !== 0){
+      if(animal.length !== 0){ /* Se o tamanho do vetor retornado for diferente de 0 significa que já foi criado o animal */
         throw new Error("O dono ja possui um animal com esse nome.")
       }
       this.animalRepository.create({
@@ -51,6 +59,7 @@ class AnimalService {
     return animals;
   }
 
+  /* Calcula o custo total do animal, de acordo com seus agendamentos */
   async calcCostTotal(animals){
     var total = 0;
     for(var i = 0; i< animals.length; i++ ){
@@ -58,7 +67,6 @@ class AnimalService {
       const cost = await this.animalRepository.calcCostName(a.id);
       total += cost[0].sum;
       a.cost = cost[0].sum;
-      console.log("Animal depois",a);
       
     }
     return total;
@@ -80,7 +88,7 @@ class AnimalService {
   async findByAnimalOwner(name, owner): Promise<string>{
     const animal = await this.animalRepository.findByAnimalOwner(name, owner);
     try {
-      if(animal.length === 0 ){
+      if(animal.length === 0 ){  /* Se o tamanho do vetor retornado for igual a 0 significa que não foi criado o animal */
         throw new Error("Animal não cadastrado.");
       }
       

@@ -4,6 +4,7 @@ import { PersonRepository } from '../repositories/PersonRepository';
 
 import { PersonService } from "../service/PersonService";
 
+/* Onde os requests são mapeados */
 class PersonController {
     delete(name: string): void {
         this.personService.delete(name);

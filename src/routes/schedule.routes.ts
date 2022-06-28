@@ -4,6 +4,10 @@ import scheduleController from "../controller/IndexSchedule";
 
 const scheduleRoutes = Router();
 
+/* Define as rotas relacionadas com a entidade do tipo Schedule, chama os controladores com as
+ * funcionalidades e retorna um JSON como resposta. 
+ */
+
 scheduleRoutes.post('/', (request, response) => {
   scheduleController().handle(request,response);
 

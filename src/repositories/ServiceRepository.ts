@@ -4,6 +4,8 @@ import { AppDataSource } from '../database';
 import { IServiceRepository, ICreateServiceDTO } from './IServiceRepository';
 import { response } from 'express';
 
+/* Em Repository temos a interface que é conectada com o banco de dados, aqui estão definidas as querys */
+
 class ServiceRepository implements IServiceRepository {
   private repository: Repository<Service>;
 
@@ -11,6 +13,7 @@ class ServiceRepository implements IServiceRepository {
     this.repository = AppDataSource.getRepository(Service);
   }
 
+  /* Query utilizada para buscar serviço pelo nome */
   async findByName(name: string): Promise<Service[]> {
     const services = await this.repository.query('SELECT * FROM public."Service" as S where S.name ILIKE $1',[name]);
     return services;
@@ -25,6 +28,7 @@ class ServiceRepository implements IServiceRepository {
     this.repository.save(service);
   }
 
+  /* Query utilizada para retornar todos os serviços do banco */
   async list(): Promise<Service[]> {
     return await this.repository.query('SELECT * FROM public."Service"');
   }
