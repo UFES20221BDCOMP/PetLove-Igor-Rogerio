@@ -51,7 +51,74 @@ A porta a qual a aplicação foi atribuida é a `localhost:3333`.
 
 <br/>
 
-## 📁 Estrutura de Arquivos
+# 📚 Testes com a Aplicação
+
+Para realizar os testes, é necessário utilizar o Insomnia e importar a configuração "Insomnia_2022-06-27.json", o diretório `test` contém a exportação do Insomnia, com todos os requests implementados.
+Para isso, no Insomnia, basta ir na engrenagem no canto superior direito, selecionar "Data", "Import Data" e selecionar o arquivo "Insomnia_2022-06-27.json".
+
+Temos um [documento](/test/testes.txt) possuindo alguns testes para as determinadas rotas da aplicação.
+
+Obs: O sistema não está fazendo controle de erro, caso ocorra algum erro por violação de chave extrangeira 
+(adicionou algum campo sem existir uma referencia pra ele) deve reiniciar a aplicação.
+
+Nos deparamos com um erro "Cannot remove headers after they are sent to the client" ao qual não conseguimos 
+solucionar, porém o erro realmente não tem nenhum impacto significante no sistema, conseguimos adicionar e remover as 
+entidades mesmo assim. Se o erro interferir, devemos reiniciar a aplicação.
+
+<br>
+
+# 🚀 Rotas
+
+A aplicação possui as determinadas rotas:
+
+```js
+/* Person - post e get */
+
+localhost:3333/persons
+```
+```js
+/* Animal - post e get */
+
+localhost:3333/animals
+```
+```js
+/* Services - post e get */
+
+localhost:3333/services
+```
+```js
+/* Schedule - post e get */
+
+localhost:3333/schedules
+```
+
+Temos as rotas de Questões, fizemos essas rotas unicamente para empregar relações entre as tabelas.
+
+Nas questions temos um mecanimos de filtro, que pode filtrar pelos campos:
+animalName, animalType, personName, dateBegin, dateEnd, serviceName.
+
+Caso queria utilizar o filtro, precisa apenas colocar o nome do campo seguido de seu valor, como mostrado no [documento de testes](/test/testes.txt). Caso queira usar mais de um filtro basta colocar um & entre um elemento e outro.
+Tambêm é possível fazer a busca sem filtros enviado um get para a rota sem colocar nenhum dado.
+```js
+/* Question (Quantity) - get */
+
+localhost:3333/questions/quantity/?...
+```
+```js
+/* Question (Media) - get */
+
+localhost:3333/questions/media/?...
+```
+```js
+/* Question (Media de Tudo) - get */
+
+localhost:3333/questions/media
+```
+
+
+<br/>
+
+# 📁 Estrutura de Arquivos
 
 Aqui podemos ver como os arquivos são estruturados no projeto
 
@@ -96,12 +163,6 @@ Alguns itens abaixo poderiam contribuir para uma melhoria no projeto, são eles:
 - Desenvolver uma interface gráfica para melhor visualização.
 - Melhor manipulação dos tipos Datas, tal como mais tratamentos e funções.
 - Implementar tratamento de erros.
-
-<br/>
-
-# 📚 Testes com a Aplicação
-
-O diretório `test` contém a exportação do Insomnia, com todos os requests implementados. Também tem um [documento](/test/instrução.txt) ao qual diz como importar esse arquivo e possui as rotas alguns exemplos.
 
 <br/>
 

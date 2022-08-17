@@ -1,15 +1,12 @@
-Para realizar os testes, é necessário utilizar o Insomnia e importar a configuração "Insomnia_2022-06-27.json".
-Para isso, basta ir na engrenagem no canto superior direito, selecionar "Data", "Import Data" e selecionar o arquivo.
+Para testar, selecione cada modelo JSON abaixo, iniciando em { e finalizando em }.
+Por exemplo, para adicionar o "Eduardo", selecionaria e adicionaria ao Insomnia o trecho abaixo.
+{
+	"name": "Eduardo",
+	"doc": "1654444853",
+	"birthDate": "1999/12/31"
+}
 
-Deixamos aqui embaixo alguns exemplos de entrada para a utilização na aplicação.
-Obs: O sistema não está fazendo controle de erro, caso ocorra algum erro por violação de chave extrangeira 
-(adicionou algum campo sem existir uma referencia pra ele) deve reiniciar a aplicação.
-
-Também nos deparamos com um erro "Cannot remove headers after they are sent to the client" ao qual não conseguimos 
-solucionar, porém o erro realmente não tem nenhum impacto significante no sistema, conseguimos adicionar e remover as 
-entidades mesmo assim. Se o erro interferir, também devemos reiniciar a aplicação.
-
--------------- Person (localhost:3333/persons)
+-------------- Person (localhost:3333/persons) - POST
 {
 	"name": "Tom Cruise",
 	"doc": "000001",
@@ -36,8 +33,8 @@ entidades mesmo assim. Se o erro interferir, também devemos reiniciar a aplica�
 	"birthDate": "1993/12/13"
 }
 
-------------- Animal (localhost:3333/animals)
-Owner deve existir para cadastrar o animal.
+------------- Animal (localhost:3333/animals) - POST
+Owner deve existir (Person cadastrado) para cadastrar o animal.
 
 {
 	"name": "Snorlax",
@@ -65,7 +62,7 @@ Owner deve existir para cadastrar o animal.
 	"type": "Dragão"
 }
 
----------- Serviços (localhost:3333/services)
+---------- Serviços (localhost:3333/services) - POST
 {
 	"name": "Banho",
 	"value": 50
@@ -83,7 +80,7 @@ Owner deve existir para cadastrar o animal.
 	"value": 200
 }
 
---------- Schedule (localhost:3333/schedules)
+--------- Schedule (localhost:3333/schedules) - POST
 {
 	"service": "Banho",
 	"date": "2022/02/08",
@@ -103,12 +100,12 @@ Owner deve existir para cadastrar o animal.
 	"owner": "456123"
 }
 
--------------- Question (localhost:3333/questions)
+-------------- Question (localhost:3333/questions) - GET
 
 Fizemos essa rota unicamente para empregar relações entre as tabelas.
 Nas questions temos um mecanimos de filtro, que pode filtrar pelos campos:
-animalName ,animalType,personName,dateBegin,dateEnd,serviceName
-Caso queria utilizar o filtro precisa apenas colocar o nome do campo seguido de seu valor, como mostrado nos exemplos abaixo. Caso queira 
+animalName, animalType, personName, dateBegin, dateEnd, serviceName.
+Caso queria utilizar o filtro, precisa apenas colocar o nome do campo seguido de seu valor, como mostrado nos exemplos abaixo. Caso queira 
 usar mais de um filtro basta colocar um & entre um elemento e outro.
 Tambêm é possível fazer a busca sem filtros enviado um get para a rota sem colocar nenhum dado, como no terceiro exemplo
 
