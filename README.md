@@ -51,22 +51,6 @@ A porta a qual a aplicação foi atribuida é a `localhost:3333`.
 
 <br/>
 
-# 📚 Testes com a Aplicação
-
-Para realizar os testes, é necessário utilizar o Insomnia e importar a configuração "Insomnia_2022-06-27.json", o diretório `test` contém a exportação do Insomnia, com todos os requests implementados.
-Para isso, no Insomnia, basta ir na engrenagem no canto superior direito, selecionar "Data", "Import Data" e selecionar o arquivo "Insomnia_2022-06-27.json".
-
-Temos um [documento](/test/testes.txt) possuindo alguns testes para as determinadas rotas da aplicação.
-
-Obs: O sistema não está fazendo controle de erro, caso ocorra algum erro por violação de chave extrangeira 
-(adicionou algum campo sem existir uma referencia pra ele) deve reiniciar a aplicação.
-
-Nos deparamos com um erro "Cannot remove headers after they are sent to the client" ao qual não conseguimos 
-solucionar, porém o erro realmente não tem nenhum impacto significante no sistema, conseguimos adicionar e remover as 
-entidades mesmo assim. Se o erro interferir, devemos reiniciar a aplicação.
-
-<br>
-
 # 🚀 Rotas
 
 A aplicação possui as determinadas rotas:
@@ -115,6 +99,21 @@ localhost:3333/questions/media/?...
 localhost:3333/questions/media
 ```
 
+<br/>
+
+# 📚 Testes com a Aplicação
+
+Para realizar os testes, é necessário utilizar o Insomnia e importar a configuração "Insomnia_2022-06-27.json", o diretório `test` contém a exportação do Insomnia, com todos os requests implementados.
+Para isso, no Insomnia, basta ir na engrenagem no canto superior direito, selecionar "Data", "Import Data" e selecionar o arquivo "Insomnia_2022-06-27.json".
+
+Temos um [documento](/test/testes.txt) possuindo alguns testes para as determinadas rotas da aplicação.
+
+Obs: O sistema não está fazendo controle de erro, caso ocorra algum erro por violação de chave extrangeira 
+(adicionou algum campo sem existir uma referencia pra ele) deve reiniciar a aplicação.
+
+Nos deparamos com um erro "Cannot remove headers after they are sent to the client" ao qual não conseguimos 
+solucionar, porém o erro realmente não tem nenhum impacto significante no sistema, conseguimos adicionar e remover as 
+entidades mesmo assim. Se o erro interferir, devemos reiniciar a aplicação.
 
 <br/>
 
